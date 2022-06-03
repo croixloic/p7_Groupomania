@@ -1,6 +1,8 @@
 const  Sequelize  = require('sequelize')
+const dotenv = require('dotenv');
+dotenv.config();
 
-const sequelize = new Sequelize ('groupomania','root', '', {
+const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.env.PASSWORD, {
 
     host: 'localhost',
     dialect: 'mysql',
@@ -31,11 +33,26 @@ const sequelize = new Sequelize ('groupomania','root', '', {
 
     db.users = require('./models/userModel')(sequelize, Sequelize);
     db.posts = require('./models/posts')(sequelize, Sequelize);
+    db.comment = require('./models/commentModel')(sequelize,Sequelize);
+
 
 
     // post et user
 
     db.users.hasMany(db.posts, {foreignkey: "userId", as: "user"});
     db.posts.belongsTo(db.users, {foreignkey: "userId", as: "user"});
+
+    // user et comment
+
+     db.users.hasMany(db.comment,{ as: "comments", onDelete: "CASCADE" });
+     db.comment.belongsTo(db.users,{ foreignKey: "userId", as: "user",});
+
+    
+    //post et comment
+
+    db.posts.hasMany(db.comment, { as: "comments", onDelete: "CASCADE" });
+    db.comment.belongsTo(db.posts,{foreignKey: "postId", as: "post",});
+
+
 
  module.exports = db;

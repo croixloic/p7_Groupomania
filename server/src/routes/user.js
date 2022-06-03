@@ -8,7 +8,7 @@ router.post('/signup', userController.signup); // ajouter auth et multer
 router.post ('/login', userController.login);
 router.get('/:id', userController.getOneUser);
 router.get('/', userController.getAllUser);
-router.put('/:id', multer, userController.updateUser);
+router.put('/', auth, multer, userController.updateUser);
 router.delete('/', auth, userController.deleteUser);
 
 

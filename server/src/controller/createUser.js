@@ -72,6 +72,7 @@ const fs = require('fs');
 
      exports.getOneUser = (req, res, next) =>{
         User.findOne({
+            where: { postId: req.params.id },
             attributes: ["lastName", "firstName", "email", "imagesUrl"],})
             .then((user) =>{
                 res.status(200).json(user);
@@ -93,17 +94,17 @@ const fs = require('fs');
             
     };
 
-    exports.updateUser = (req, res, next) => {
-        const userObject = req.file ?
-         {
-            ...JSON.parse(req.body.user),
-            imageUrl: `${req.protocol}://${req.get("host")}/images/${
-              req.file.filename
-            }`,
-          }
-        : { ...req.body };
-        User.updateOne({_id: req.params.id}, { ...userObject, id: req.params.id})
-        .then(() => res.status(200).json({ message: "l'utilisateur est modifier"}))
+    exports.updateUser = (req, res, next) => {  
+        const updateProfilUser = {
+            lastName: req.body.lastName,
+            firstName: req.body.firstName,
+            email: req.body.email,
+        };
+        User.update(updateProfilUser, {where: { id: req.auth.userId }})
+        .then(() => {
+            console.log(updateProfilUser);
+            res.status(200).json({ message: "l'utilisateur est modifié"})
+    })
         .catch((error) => res.status(400).json({ error }))
     };
 

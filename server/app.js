@@ -16,6 +16,9 @@ const UserModel= require('./src/models/userModel');
 const postRoutes = require('./src/routes/postsRoute');
 const PostModel = require('./src/models/posts');
 
+const commentRoutes = require('./src/routes/commentRoute');
+const commentModel = require('./src/models/commentModel');
+
 
 
 app
@@ -25,8 +28,9 @@ app
 .use("/images", express.static(path.join(__dirname, "images")));
 
 
-app.use("/", userRoutes);
+app.use("/user", userRoutes);
 app.use("/post", postRoutes);
+app.use("/comment",commentRoutes);
 
 
 app.listen(port, () =>
