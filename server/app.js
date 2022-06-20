@@ -15,6 +15,7 @@ const UserModel= require('./src/models/userModel');
 
 const postRoutes = require('./src/routes/postsRoute');
 const PostModel = require('./src/models/posts');
+const likeModel = require('./src/models/likeModel');
 
 const commentRoutes = require('./src/routes/commentRoute');
 const commentModel = require('./src/models/commentModel');

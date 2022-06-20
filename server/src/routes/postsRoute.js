@@ -8,6 +8,8 @@ const auth = require('../middleware/auth');
 router.get('/', postController.getAllPosts);
 router.get ('/:id', postController.getOnePost);
 router.post('/', auth, postController.createPost);
+router.post('/', auth, postController.likePost);
+router.post('/', auth, postController.unlikePost);
 router.put('/:id',auth, postController.postModify);
 router.delete('/:id', auth, postController.deletePost);
 

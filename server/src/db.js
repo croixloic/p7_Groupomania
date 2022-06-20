@@ -34,6 +34,7 @@ const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.
     db.users = require('./models/userModel')(sequelize, Sequelize);
     db.posts = require('./models/posts')(sequelize, Sequelize);
     db.comment = require('./models/commentModel')(sequelize,Sequelize);
+    db.likes = require('./models/likeModel')(sequelize, Sequelize);
 
 
 
@@ -52,6 +53,14 @@ const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.
 
     db.posts.hasMany(db.comment, { as: "comments", onDelete: "CASCADE" });
     db.comment.belongsTo(db.posts,{foreignKey: "postId", as: "post",});
+
+    // like et post 
+    db.posts.hasMany(db.likes, { as: "likes", onDelete: "CASCADE" }); 
+    db.likes.belongsTo(db.posts, {foreignKey: "postId", as: "post",});
+
+    // like et user
+    db.users.hasMany(db.likes, { as: "likes", onDelete: "CASCADE" });
+    db.likes.belongsTo(db.users, {foreignKey: "userId", as: "user",});
 
 
 

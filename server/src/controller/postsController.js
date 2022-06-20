@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../db'); 
 const Post = db.posts;
 const User = db.users;
+const Like = db.likes;
 
 
 exports.createPost = (req, res, next) => {
@@ -78,3 +79,37 @@ exports.deletePost = (req, res, next) =>{
         res.status(500).json({ error })
     });
     };
+
+    exports.likePost = (req, res, next) => {
+        const postId = req.body.id;
+        const userId = req.auth.id;
+        Like.findAll({ where: {userId, postId} })
+        .then(likes => {
+            if (likes.length) {
+                throw 'Post déjà liké'
+            }
+            return Like.create({
+                userId,
+                postId
+            })
+                .then((like) => res.status(201).json({message: "Like crée !"}))
+        })
+        .catch((error) => res.status(400).json({error}))
+      };
+
+      exports.unlikePost = (req, res) => {
+        const postId = req.body.id;
+        const userId = req.auth.id;
+        Like.findAll({ where: {userId, postId} })
+            .then(likes => {
+                if (!likes.length) {
+                    throw 'Post non liké'
+                }
+                const likesIds = likes.map(like => like.id)
+                Like.destroy({ where: { id: likesIds } })
+                    .then((like) => res.status(201).json({message: "Like annulé !"}))
+            })
+            .catch((error) => res.status(400).json({error}))
+    }
+
+
