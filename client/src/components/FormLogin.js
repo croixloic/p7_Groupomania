@@ -12,15 +12,11 @@ const FormLogin = () => {
         if (!email || !password) {
             alert ("veuillez remplir tous les champs du formulaire");
         } else {
-            axios ({
-                method: "post",
-                url: `${process.env.REACT_APP_API_URL}user/login`,
-                withCredentials: true,
-                data: {
-                  email,
-                  password,
-                },
-              })
+          axios
+          .post(`${process.env.REACT_APP_API_URL}user/login`, {
+            email,
+            password,
+          })
               .then ((res) =>{
               console.log(res);
               if (res.data.errors){
@@ -28,6 +24,7 @@ const FormLogin = () => {
                 passwordError.innerHTML = res.data.passwordError;
               } else {
                 window.location="/";
+                localStorage.token = res.data.token;
               }
             })
             .catch ((err) => {

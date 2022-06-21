@@ -32,7 +32,11 @@ const fs = require('fs');
                 };
                 User.create(user)
                 .then(()=>res.status(201).json({ message: " Bravo compte crée  !" })) 
-                .catch(() =>res.status(400).json({ error }))
+                .catch((error) =>{
+                    console.log(error);
+                    res.status(400).json({ error })
+                })
+                
              })
              .catch(error => {
                  const message = `l'utilisateur n'a pas pu être enregistré`
