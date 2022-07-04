@@ -76,7 +76,7 @@ const fs = require('fs');
 
      exports.getOneUser = (req, res, next) =>{
         User.findOne({
-            where: { postId: req.params.id },
+            where: { id: req.params.id },
             attributes: ["lastName", "firstName", "email", "imagesUrl"],})
             .then((user) =>{
                 res.status(200).json(user);
@@ -125,3 +125,8 @@ const fs = require('fs');
             res.status(500).json({ error })
         });
         };
+
+        module.exports.logout = (req, res) => {
+            res.clearCookie("jwt");
+            res.status(200).json("OUT");
+          };
