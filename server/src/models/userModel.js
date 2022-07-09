@@ -22,7 +22,7 @@ const User = sequelize.define('user', {
   imagesUrl: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: "http://localhost:3000/images/image_defaut.jpg",
+    defaultValue: "http://localhost:5000/images/image_defaut.jpg",
   },
   admin: {
     type: Sequelize.BOOLEAN,

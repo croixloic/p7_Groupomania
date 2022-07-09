@@ -34,7 +34,7 @@ exports.getOnePost = (req, res, next) =>{
 
 exports.getAllPosts = (req, res, next) => {
     Post.findAll({
-        attributes: ["content", "images", "date"],})
+        include: 'user'})
         .then((post) => {
             res.status(200).json({post})
         })
@@ -111,5 +111,3 @@ exports.deletePost = (req, res, next) =>{
             })
             .catch((error) => res.status(400).json({error}))
     }
-
-
