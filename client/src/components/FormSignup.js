@@ -41,11 +41,12 @@ const FormSignup = () => {
     }
   };
   return (
-    <form action="" onSubmit={handleSignup} id="form-signup">
+    <form action="" onSubmit={handleSignup} id="form_signup">
       <label htmlFor="firstName">Prénom</label>
       <input
         type="text"
         name="firstName"
+        className="input_signup"
         id="firstName"
         onChange={(e) => setFirstName(e.target.value)}
         value={firstName}
@@ -57,6 +58,7 @@ const FormSignup = () => {
       <input
         type="text"
         name="lastName"
+        className="input_signup"
         id="lastName"
         onChange={(e) => setLastName(e.target.value)}
         value= {lastName}
@@ -68,6 +70,7 @@ const FormSignup = () => {
       <input
         type="text"
         name="email"
+        className="input_signup"
         id="email"
         onChange={(e) => setEmail(e.target.value)}
         value= {email}
@@ -79,13 +82,14 @@ const FormSignup = () => {
       <input
         type="password"
         name="password"
+        className="input_signup"
         id="password"
         onChange={(e) => setPassword(e.target.value)}
         value= {password}
         placeholder="Entrer votre mot de passe"
       />
       <div className="password error"></div>
-      <input type="submit" value="S'incrire" />
+      <input type="submit" className="submit" value="S'incrire" />
     </form>
   );
 };

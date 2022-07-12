@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PostDelete from './PostDelete';
 
 const PostsRead = () => {
 
     const [posts, setPosts]= useState([]);
-    const [user, setUser] = useState([]);
 
     const Posts = () => {
 
@@ -31,6 +31,7 @@ const PostsRead = () => {
           <em>{element.user.firstName} {element.user.lastName}</em>
           <p>{element.content} {element.date}</p>
           <Link to={`/post/${element.id}`}>Voir le post</Link>
+          <PostDelete to={`/post/${element.id}`}/>
         </div>
             ))}
 

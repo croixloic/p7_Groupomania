@@ -1,0 +1,41 @@
+@import './settings.scss';
+
+#form_signup{
+border: 2px solid  $primary-color;
+width: 40%;
+padding: 20px 0;
+margin: 35px auto 0;
+user-select: none;
+text-align: center;
+background-color: $secondary-color;
+font-size: 18px;
+display: flex;
+flex-direction: column;
+}
+
+h2 {
+    text-align: center;
+}
+.input_signup {
+margin: 0 20%;
+font-size: 1rem;
+transition: 0.2s;
+padding-left: 6px;
+}
+.submit {
+    width: 40%;
+    font-size: 16px;
+    margin: 15px 30%;
+    border-radius: 10px;
+    padding: 4px 0;
+    transition: 0.2s;
+}
+.submit:hover {
+    background-image: linear-gradient(to top, $secondary-color, $primary-color);
+    color: $tertiary-color;
+    box-shadow: 4px 4px 11px 0 #9a9a9a;
+}
+
+.input_signup:hover {
+    box-shadow: 8px 8px 8px -7px #9a9a9a;
+}

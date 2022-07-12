@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "lato", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "lato", sans-serif;
+}
+
+#form_signup {
+  border: 2px solid #fd2d01;
+  width: 40%;
+  padding: 20px 0;
+  margin: 35px auto 0;
+  user-select: none;
+  text-align: center;
+  background-color: #ffd7d7;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  text-align: center;
+}
+
+.input_signup {
+  margin: 0 20%;
+  font-size: 1rem;
+  transition: 0.2s;
+  padding-left: 6px;
+}
+
+.submit {
+  width: 40%;
+  font-size: 16px;
+  margin: 15px 30%;
+  border-radius: 10px;
+  padding: 4px 0;
+  transition: 0.2s;
+}
+
+.submit:hover {
+  background-image: linear-gradient(to top, #ffd7d7, #fd2d01);
+  color: #4e5166;
+  box-shadow: 4px 4px 11px 0 #9a9a9a;
+}
+
+.input_signup:hover {
+  box-shadow: 8px 8px 8px -7px #9a9a9a;
+}
+
+/*# sourceMappingURL=style.css.map */

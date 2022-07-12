@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import CommenteCreate from './CommenteCreate';
 
 const SinglePost = () => {
   const params = useParams();
@@ -31,6 +32,7 @@ const SinglePost = () => {
         {post.comments &&
           post.comments.map((comment) => <li>{comment.content}</li>)}
       </ul>
+      < CommenteCreate to={`/post/${params.id}`} />
     </>
   );
 };
