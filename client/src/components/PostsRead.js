@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PostDelete from './PostDelete';
+import PostsCreate from './PostsCreate';
 
 const PostsRead = () => {
 
@@ -22,6 +22,20 @@ const PostsRead = () => {
         Posts();
     }, [])
 
+    const handleDelete = (postId) => {
+        console.log(postId);
+    
+        axios
+          .delete(`${process.env.REACT_APP_API_URL}post/` + postId)
+          .then((res) => {
+             console.log(res);
+            Posts();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+
     return (
         
         <div>
@@ -31,9 +45,10 @@ const PostsRead = () => {
           <em>{element.user.firstName} {element.user.lastName}</em>
           <p>{element.content} {element.date}</p>
           <Link to={`/post/${element.id}`}>Voir le post</Link>
-          <PostDelete to={`/post/${element.id}`}/>
+          <button onClick={() => handleDelete(element.id)} >Supprimer</button>
         </div>
             ))}
+            <PostsCreate Posts={Posts} />
 
         </div>
     );

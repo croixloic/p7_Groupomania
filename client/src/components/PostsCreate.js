@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const PostsCreate = () => {
+const PostsCreate = (props) => {
   const [content, setContent] = useState("");
   const handleCreate = (e) => {
     e.preventDefault();
@@ -11,7 +11,9 @@ const PostsCreate = () => {
     } else {
       axios.post(`${process.env.REACT_APP_API_URL}post`, {
         content,
-      });
+      }).then (()=> {
+        props.Posts()
+      })
     }
   };
   return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const CommenteCreate = () => {
+const CommenteCreate = (props) => {
     const params = useParams();
     const [content, setContent] = useState("");
     const handleCreateComment = (e) => {
@@ -13,7 +13,9 @@ const CommenteCreate = () => {
         } else {
             axios.post(`${process.env.REACT_APP_API_URL}comment/` + params.id, {
                 content,
-            });
+            }) .then (() => {
+                props.commentaire()
+            })
         }
     };
     return (

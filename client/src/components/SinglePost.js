@@ -6,23 +6,30 @@ import CommenteCreate from './CommenteCreate';
 const SinglePost = () => {
   const params = useParams();
 
-  // params.id
-
   const [post, setPost] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}post/` + params.id)
-      .then((post) => {
-        axios
-          .get(`${process.env.REACT_APP_API_URL}comment/` + params.id)
-          .then((comment) => {
-            setPost({ ...post.data, comments: comment.data });
-          });
-      });
-  }, [params]);
+  const Comment = () => {
 
+    axios
+    .get(`${process.env.REACT_APP_API_URL}post/` + params.id)
+    .then((post) => {
+      axios
+      .get(`${process.env.REACT_APP_API_URL}comment/` + params.id)
+      .then((comment) => {
+        // console.log(comment);
+        setPost({ ...post.data, comments: comment.data });
+      });
+    });
+  }
+    useEffect(() => {
+      Comment();
+  }, []);
+  
   console.log(post);
+  const commentDelete = (comment) => {
+    console.log(comment);
+
+  }
 
   return (
     <>
@@ -31,8 +38,9 @@ const SinglePost = () => {
       <ul>
         {post.comments &&
           post.comments.map((comment) => <li>{comment.content}</li>)}
+      <button onClick={() => commentDelete(params.id)}>Supprimer</button>
       </ul>
-      < CommenteCreate to={`/post/${params.id}`} />
+      < CommenteCreate to={`/post/${params.id}`} commentaire= {Comment}  />
     </>
   );
 };
