@@ -36,13 +36,14 @@ const PostsRead = () => {
       });
   };
 
-   const handleModify = (postId, textUpdated) => {
+   const handleModify = (postId) => {
+     console.log(textUpdated);
     if (textUpdated === "") {
       alert("veuillez mettre un message !"); 
     } else {
      axios 
      .put(`${process.env.REACT_APP_API_URL}post/` + postId,{
-      textUpdated,
+      content: textUpdated,
      })
        .then((res) => {
         setUpdated(false);

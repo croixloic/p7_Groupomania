@@ -45,7 +45,7 @@ const SinglePost = () => {
       alert("veuillez mettre un message !"); 
     } else {
       axios.put(`${process.env.REACT_APP_API_URL}comment/` + comments, {
-        textUpdated
+        content: textUpdated,
       }).then((res) => {
         setUpdated(false);
         Comment();

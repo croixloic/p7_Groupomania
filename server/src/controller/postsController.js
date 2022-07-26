@@ -45,6 +45,7 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.postModify = (req, res, next) => {
+    console.log(req.body);
     Post.findOne({ where: { id: req.auth.userId }})
     const postId = req.params.id
     const userId = req.auth.userId
