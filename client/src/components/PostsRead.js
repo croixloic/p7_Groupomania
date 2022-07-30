@@ -7,6 +7,7 @@ const PostsRead = () => {
   const [posts, setPosts] = useState([]);
   const [updated, setUpdated] = useState(false);
   const [textUpdated, setTextUpdated] = useState(null);
+  const [images, setImage] = useState();
 
   const Posts = () => {
     axios
@@ -36,15 +37,26 @@ const PostsRead = () => {
       });
   };
 
+  const handleFile = (e) => {
+    setImage (e.target.files[0])
+  }
+
    const handleModify = (postId) => {
+
+     
+     
      console.log(textUpdated);
-    if (textUpdated === "") {
-      alert("veuillez mettre un message !"); 
-    } else {
-     axios 
-     .put(`${process.env.REACT_APP_API_URL}post/` + postId,{
-      content: textUpdated,
-     })
+     if (textUpdated === "") {
+       alert("veuillez mettre un message !"); 
+      } else {
+        const formData = new FormData ();
+    
+        formData.append("image", images)
+        formData.append('content', textUpdated)
+        axios 
+     .put(`${process.env.REACT_APP_API_URL}post/` + postId,
+      formData
+     )
        .then((res) => {
         setUpdated(false);
         console.log(res);
@@ -64,6 +76,7 @@ const PostsRead = () => {
         <div className="post">
           <em>
             {element.user.firstName} {element.user.lastName}
+          <img src={element.images} />
           </em>
           {updated === false && (
             <p>
@@ -76,6 +89,7 @@ const PostsRead = () => {
                 defaultValue={element.content}
                 onChange={(e) => setTextUpdated(e.target.value)}
               />
+                <input type='file' name="images" id="images" onChange={(e) => handleFile(e)}></input>
               <div>
                 <button className="btn" onClick={() => {
                      handleModify(element.id)}}>Valider la modification</button>

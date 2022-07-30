@@ -15,24 +15,25 @@ const PostsCreate = (props) => {
 
     let formData = new FormData();
 
-    formData.append = ('images', images)
-    formData.append = ("content", content)
+    formData.append ('image', images)
+    formData.append ("content", content)
 
 
     if (content === "") {
       alert("veuillez mettre un message !");
     } else {
-      axios.post(`${process.env.REACT_APP_API_URL}post`, {    //content
-        content, images
-      }).then (()=> {
+      axios.post(`${process.env.REACT_APP_API_URL}post`, formData   //content
+      ).then (()=> {
         props.Posts()
+        setContent("")
+        e.target.reset()
       })
     }
   };
 
   return (
     <>
-      <form action="" onSubmit={handleCreate} id="form-post">
+      <form action="" onSubmit= {(e) =>{handleCreate(e)}} id="form-post">
         <textarea
           name="content"
           id="content"

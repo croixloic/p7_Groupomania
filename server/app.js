@@ -26,9 +26,9 @@ const commentModel = require('./src/models/commentModel');
 
 app
 .use(morgan('dev'))
-.use(helmet())
 .use(bodyParser.json())
-.use("/images", express.static(path.join(__dirname, "images")));
+.use("/images", express.static(path.join(__dirname, "images")))
+.use(helmet())
 app.use (cors());
 
 

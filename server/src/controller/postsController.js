@@ -12,6 +12,7 @@ exports.createPost = (req, res, next) => {
         images: req.body.files,
         userId: req.auth.userId,
     }
+    console.log(req.body);
     if (req.file != undefined) {
         post.images = `${req.protocol}://${req.get("host")}/images/${
           req.file.filename}`;
@@ -46,15 +47,15 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.postModify = (req, res, next) => {
     console.log(req.body);
-    Post.findOne({ where: { id: req.auth.userId }})
+    Post.findOne({ where: { id: req.params.id }})
     const postId = req.params.id
     const userId = req.auth.userId
     
     const postObject = req.file ? {
         ...req.body,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        images: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     } : { ...req.body }
-    
+    console.log(req.file);
     Post.update(postObject, {
         where: {
             id: postId,
