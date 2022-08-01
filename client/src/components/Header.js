@@ -16,7 +16,6 @@ const Header = () => {
                     <NavLink to='/login' className={(nav) => (nav.isActive ? 'nav-active' : '')}><li>Connexion</li></NavLink>
                 </ul>
             </nav>
-            <h1>Groupomania</h1>
             
         </div>
     );

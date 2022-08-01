@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PostsCreate from "./PostsCreate";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp} from '@fortawesome/free-solid-svg-icons'
 
 const PostsRead = () => {
   const [posts, setPosts] = useState([]);
@@ -68,6 +70,17 @@ const PostsRead = () => {
     }
    };
 
+   const likePost = (postId) => {
+    axios.post (`${process.env.REACT_APP_API_URL}post/like` + postId ,
+    )
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+   } 
+
   return (
     <div>
       <h1> Les posts</h1>
@@ -96,6 +109,12 @@ const PostsRead = () => {
               </div>
             </div>
           )}
+          <div className="socialAction"> 
+          <button className="socialActionBtn" onClick={() => likePost (element.id)}>
+
+          <FontAwesomeIcon className="socialActionIcon"  icon={faThumbsUp}/>
+          </button>
+          </div>
           <Link to={`/post/${element.id}`}>Voir le post</Link>
           <button onClick={() => handleDelete(element.id)}>Supprimer</button>
           <button onClick={() =>{ setUpdated (!updated)}} >Modifier</button>

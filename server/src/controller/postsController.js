@@ -35,6 +35,7 @@ exports.getOnePost = (req, res, next) =>{
 
 exports.getAllPosts = (req, res, next) => {
     Post.findAll({
+        order: [['date', 'DESC']], 
         include: 'user'})
         .then((post) => {
             res.status(200).json({post})
@@ -83,33 +84,49 @@ exports.deletePost = (req, res, next) =>{
     };
 
     exports.likePost = (req, res, next) => {
-        const postId = req.body.id;
-        const userId = req.auth.id;
-        Like.findAll({ where: {userId, postId} })
-        .then(likes => {
-            if (likes.length) {
-                throw 'Post déjà liké'
-            }
-            return Like.create({
-                userId,
-                postId
+        if (req.body.likes === 1) {
+            Like.updateOne ({where: { id: req.params.id }},
+                {
+                $inc: { likes: req.body.like++ },
+                $push: { usersLiked: req.auth.userId },
             })
-                .then((like) => res.status(201).json({message: "Like crée !"}))
+            .then(() => res.status(200).json ({message: "Post liked"}))
+            .catch((error) => res.status(400).json({error}))
+        }
+
+        //dislike
+        else if (req.body.like === -1) {
+            Like.create({where: { id: req.params.id }},
+                {
+                $inc: { likes: req.body.like++ * -1},
+                $push: { usersLiked: req.auth.userId },
         })
-        .catch((error) => res.status(400).json({error}))
+        .then(() => res.status(200).json({message: "Post disliked"}))
+        .catch((error) => res.status(400).json({ error }))
+        }
+        else {
+            Like.findOne({ where: { id: req.params.id }})
+            .then((Like) => {
+                if(Like.usersLiked.includes(req.auth.userId)) {
+                    Like.create ({where: { id: req.params.id }},
+                        {
+                        $inc: { likes: req.body.like-- },
+                        $pull: { usersLiked: req.auth.userId },
+                })
+                .then(() => res.status(200).json({ message: "Like drop"}))
+                .catch((error) => res.status(400).json({ error }))
+                }
+                else if (Like.userDisliked.includes(req.body.userId)) {
+                    Like.create ({where: { id: req.params.id }},
+                        {
+                        $inc: { likes: req.body.like-- },
+                        $pull: { usersLiked: req.auth.userId },
+                })
+                .then(() => res.status(200).json({ message: "Dislike drop"}))
+                .catch((error) => res.status(400).json({ error }))
+                }
+            })
+            .catch((error) => res.status(400).json({ error }));
+        }
       };
 
-      exports.unlikePost = (req, res) => {
-        const postId = req.body.id;
-        const userId = req.auth.id;
-        Like.findAll({ where: {userId, postId} })
-            .then(likes => {
-                if (!likes.length) {
-                    throw 'Post non liké'
-                }
-                const likesIds = likes.map(like => like.id)
-                Like.destroy({ where: { id: likesIds } })
-                    .then((like) => res.status(201).json({message: "Like annulé !"}))
-            })
-            .catch((error) => res.status(400).json({error}))
-    }
