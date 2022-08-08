@@ -83,24 +83,33 @@ exports.deletePost = (req, res, next) =>{
     };
 
     exports.likePost = (req, res, next) => {
+        console.log(req.params.id);
     Post.findOne({ where: {id: req.params.id},
-        attributes: ["likes"]
+        attributes: ["likes", "userlikes"]
     })
     .then((post) => {
-        const userlikes = JSON.parse(post.userlikes) || []
-        if (!userlikes.include (req.auth.userId)) {
+         const userlikes = (post.userlikes && JSON.parse(post.userlikes)) || []
+        // let userlikes = []
+        // console.log(post);
+        // if(post.userlikes && post.userlikes.length){
+        //     userlikes =JSON.parse(post.userlikes)
+        // }
+        console.log(userlikes);
+        if (!userlikes.includes (req.auth.userId)) {
             userlikes.push(req.auth.userId)
-            Post.update ({ likes: post.likes++, userlikes: userlikes},
+            Post.update ({ likes: post.likes+1, userlikes: JSON.stringify( userlikes)},
                 { where: {
                     id: req.params.id
                 }
             })
             .then(() => res.status(200).json({message: "Post like"}))
-            .catch((error) => res.status(400).json({error}))
+            .catch((error) =>{
+                console.log(error);
+                 res.status(400).json({error})})
         } 
         else {
-            userlikes.destroy(req.auth.userId)
-            Post.update({likes: post.likes--},
+           const newUserlike = userlikes.filter((item) => item!== req.auth.userId)
+            Post.update({likes: post.likes-1, userlikes: newUserlike.length? JSON.stringify(newUserlike): ""},
                 {where: {
                     id: req.params.id
                 }
@@ -109,7 +118,10 @@ exports.deletePost = (req, res, next) =>{
             .catch((error)=>res.status(400).json({ error }) )
         }
     }) 
-    .catch((error) => res.status(404).json({ error }) )
+    .catch((error) =>{
+        console.log(error);
+    
+     res.status(404).json({ error }) }) 
 };
 
         exports.allLike = (req, res, next) => {

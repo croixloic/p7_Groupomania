@@ -71,10 +71,11 @@ const PostsRead = () => {
    };
 
    const likePost = (postId) => {
-    axios.post (`${process.env.REACT_APP_API_URL}post/likes` + postId ,
+    axios.post (`${process.env.REACT_APP_API_URL}post/likes/` + postId ,
     )
     .then((res) => {
       console.log(res);
+      Posts();
     })
     .catch((err) => {
       console.log(err);
@@ -89,7 +90,7 @@ const PostsRead = () => {
         <div className="post">
           <em>
             {element.user.firstName} {element.user.lastName}
-          <img src={element.images} alt="image du post" />
+          <img src={element.images} />
           </em>
           {updated === false && (
             <p>
