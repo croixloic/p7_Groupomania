@@ -71,7 +71,7 @@ const PostsRead = () => {
    };
 
    const likePost = (postId) => {
-    axios.post (`${process.env.REACT_APP_API_URL}post/like` + postId ,
+    axios.post (`${process.env.REACT_APP_API_URL}post/likes` + postId ,
     )
     .then((res) => {
       console.log(res);
@@ -89,13 +89,20 @@ const PostsRead = () => {
         <div className="post">
           <em>
             {element.user.firstName} {element.user.lastName}
-          <img src={element.images} />
+          <img src={element.images} alt="image du post" />
           </em>
           {updated === false && (
             <p>
               {element.content} {element.date}
             </p>
           )}
+          <div className="socialAction"> 
+          <button className="socialActionBtn" onClick={() => likePost (element.id)}>
+
+          <FontAwesomeIcon className="socialActionIcon"  icon={faThumbsUp}/>
+          </button>
+          <p>{element.likes} j'aime</p>
+          </div>
           {updated && (
             <div >
               <textarea
@@ -109,12 +116,6 @@ const PostsRead = () => {
               </div>
             </div>
           )}
-          <div className="socialAction"> 
-          <button className="socialActionBtn" onClick={() => likePost (element.id)}>
-
-          <FontAwesomeIcon className="socialActionIcon"  icon={faThumbsUp}/>
-          </button>
-          </div>
           <Link to={`/post/${element.id}`}>Voir le post</Link>
           <button onClick={() => handleDelete(element.id)}>Supprimer</button>
           <button onClick={() =>{ setUpdated (!updated)}} >Modifier</button>

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const db = require('../db'); 
 const Post = db.posts;
 const User = db.users;
-const Like = db.likes;
 
 
 exports.createPost = (req, res, next) => {
@@ -84,49 +83,74 @@ exports.deletePost = (req, res, next) =>{
     };
 
     exports.likePost = (req, res, next) => {
-        if (req.body.likes === 1) {
-            Like.updateOne ({where: { id: req.params.id }},
-                {
-                $inc: { likes: req.body.like++ },
-                $push: { usersLiked: req.auth.userId },
+    Post.findOne({ where: {id: req.params.id},
+        attributes: ["likes"]
+    })
+    .then((post) => {
+        const userlikes = JSON.parse(post.userlikes) || []
+        if (!userlikes.include (req.auth.userId)) {
+            userlikes.push(req.auth.userId)
+            Post.update ({ likes: post.likes++, userlikes: userlikes},
+                { where: {
+                    id: req.params.id
+                }
             })
-            .then(() => res.status(200).json ({message: "Post liked"}))
+            .then(() => res.status(200).json({message: "Post like"}))
             .catch((error) => res.status(400).json({error}))
+        } 
+        else {
+            userlikes.destroy(req.auth.userId)
+            Post.update({likes: post.likes--},
+                {where: {
+                    id: req.params.id
+                }
+            })
+            .then(() => res.status(200).json ({message: "like supprimer"}))
+            .catch((error)=>res.status(400).json({ error }) )
+        }
+    }) 
+    .catch((error) => res.status(404).json({ error }) )
+};
+
+        exports.allLike = (req, res, next) => {
+            Post.findAll({
+                attributes: ["likes"],})
+            .then((likes) => res.status(200).json(likes))
+            .catch((error) => res.status(400).json({ error }))
         }
 
-        //dislike
-        else if (req.body.like === -1) {
-            Like.create({where: { id: req.params.id }},
-                {
-                $inc: { likes: req.body.like++ * -1},
-                $push: { usersLiked: req.auth.userId },
-        })
-        .then(() => res.status(200).json({message: "Post disliked"}))
-        .catch((error) => res.status(400).json({ error }))
-        }
-        else {
-            Like.findOne({ where: { id: req.params.id }})
-            .then((Like) => {
-                if(Like.usersLiked.includes(req.auth.userId)) {
-                    Like.create ({where: { id: req.params.id }},
-                        {
-                        $inc: { likes: req.body.like-- },
-                        $pull: { usersLiked: req.auth.userId },
-                })
-                .then(() => res.status(200).json({ message: "Like drop"}))
-                .catch((error) => res.status(400).json({ error }))
-                }
-                else if (Like.userDisliked.includes(req.body.userId)) {
-                    Like.create ({where: { id: req.params.id }},
-                        {
-                        $inc: { likes: req.body.like-- },
-                        $pull: { usersLiked: req.auth.userId },
-                })
-                .then(() => res.status(200).json({ message: "Dislike drop"}))
-                .catch((error) => res.status(400).json({ error }))
-                }
-            })
-            .catch((error) => res.status(400).json({ error }));
-        }
-      };
+        //disPost
+        // else if (req.body.disPost === 1) {
+        //     Post.update({where: { id: req.params.id }},
+        //         {
+        //         $inc: { Posts: req.body.disPost++ },
+        //         $push: { usersPostd: req.auth.userId },
+        // })
+        // .then(() => res.status(200).json({message: "Post unPost"}))
+        // .catch((error) => res.status(400).json({ error }))
+        // }
+        // else {
+        //     Post.findOne({ where: { id: req.params.id }})
+        //     .then((Post) => {
+        //         if(Post.usersPostd.includes(req.auth.userId)) {
+        //             Post.create ({where: { id: req.params.id }},
+        //                 {
+        //                     $inc: { Posts: req.body.Post-- },
+        //                 $pull: { usersPostd: req.auth.userId },
+        //         })
+        //         .then(() => res.status(200).json({ message: "Post drop"}))
+        //         .catch((error) => res.status(400).json({ error }))
+        //         }
+        //         else if (Post.userDisPostd.includes(req.body.userId)) {
+        //             Post.create ({where: { id: req.params.id }},
+        //                 {
+        //                 $inc: { Posts: req.body.disPost-- },
+        //                 $pull: { usersPostd: req.auth.userId },
+        //         })
+        //         .then(() => res.status(200).json({ message: "unPost drop"}))
+        //         .catch((error) => res.status(400).json({ error }))
+        //         }
+        //     })
+        //     .catch((error) => res.status(400).json({ error }));
+        // }
 

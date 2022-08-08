@@ -9,6 +9,15 @@ module.exports = (sequelize, Sequelize) => {
         images: {
           type: Sequelize.TEXT,
         },
+
+        likes: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
+        },
+
+        userlikes: {
+          type: Sequelize.TEXT,
+        },
   
         date: {
           type: Sequelize.DATE,
