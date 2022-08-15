@@ -25,6 +25,16 @@ const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.
       });
    await sequelize.sync();
     }
+    sequelize.sync()
+    .then (() =>{
+      db.users.create ({
+        lastName: "admin",
+        firstName: "admin",
+        email: "admin@admin.fr",
+        password: "Testadmin123",
+        admin: "1"
+      })
+    })
     
     //association de table 
     const db = {};

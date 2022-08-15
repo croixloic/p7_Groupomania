@@ -16,7 +16,7 @@ const PostsRead = () => {
       .get(`${process.env.REACT_APP_API_URL}post`)
       .then((res) => {
         setPosts(res.data.post);
-      })
+      }) 
       .catch((err) => {
         console.log(err);
       });
@@ -26,12 +26,13 @@ const PostsRead = () => {
     Posts();
   }, []);
 
-  const handleDelete = (postId) => {
 
+  const handleDelete = (postId, userId) => {
+    // if (userId.id ===)
     axios
-      .delete(`${process.env.REACT_APP_API_URL}post/` + postId)
-      .then((res) => {
-        console.log(res);
+    .delete(`${process.env.REACT_APP_API_URL}post/` + postId)
+    .then((req) => {
+        console.log(req.auth);
         Posts();
       })
       .catch((err) => {
@@ -118,7 +119,11 @@ const PostsRead = () => {
             </div>
           )}
           <Link to={`/post/${element.id}`}>Voir le post</Link>
-          <button onClick={() => handleDelete(element.id)}>Supprimer</button>
+          <button onClick={() => {
+            // if (element.user.id ===)
+            handleDelete(element.id, element.user)}
+          } 
+          >Supprimer</button>
           <button onClick={() =>{ setUpdated (!updated)}} >Modifier</button>
         </div>
       ))}

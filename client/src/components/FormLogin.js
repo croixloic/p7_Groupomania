@@ -13,27 +13,30 @@ const FormLogin = () => {
       alert("veuillez remplir tous les champs du formulaire");
     } else {
       axios
-        .post(`${process.env.REACT_APP_API_URL}user/login`, {
-          email,
-          password,
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.errors) {
-            emailError.innerHTML = res.data.emailError;
-            passwordError.innerHTML = res.data.passwordError;
-          } else {
-            window.location = "/";
-            localStorage.token = res.data.token;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .post(`${process.env.REACT_APP_API_URL}user/login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.emailError;
+          passwordError.innerHTML = res.data.passwordError;
+        } else {
+           window.location = "/";
+          localStorage.token = res.data.token;
+        }
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   };
-
+  
+  
+  
   return (
+    <>
     <form action="" onSubmit={handleLogin} id="form_signup">
       <label htmlFor="email">Email</label>
       <input
@@ -61,7 +64,10 @@ const FormLogin = () => {
       <br />
       <input type="submit" className="submit" value="Se connecter" />
     </form>
+        </>
   );
 };
 
 export default FormLogin;
+
+

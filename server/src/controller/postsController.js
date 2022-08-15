@@ -71,7 +71,6 @@ exports.postModify = (req, res, next) => {
 exports.deletePost = (req, res, next) =>{
     Post.findOne({ where: { id: req.params.id }})
     .then((post) => {
-
         Post.destroy({ where: { id: req.params.id}})
         .then(() => res.status(200).json({ message: 'post supprimé !'}))
         .catch((error) => res.status(400).json({ error }))
@@ -89,11 +88,6 @@ exports.deletePost = (req, res, next) =>{
     })
     .then((post) => {
          const userlikes = (post.userlikes && JSON.parse(post.userlikes)) || []
-        // let userlikes = []
-        // console.log(post);
-        // if(post.userlikes && post.userlikes.length){
-        //     userlikes =JSON.parse(post.userlikes)
-        // }
         console.log(userlikes);
         if (!userlikes.includes (req.auth.userId)) {
             userlikes.push(req.auth.userId)
@@ -131,38 +125,5 @@ exports.deletePost = (req, res, next) =>{
             .catch((error) => res.status(400).json({ error }))
         }
 
-        //disPost
-        // else if (req.body.disPost === 1) {
-        //     Post.update({where: { id: req.params.id }},
-        //         {
-        //         $inc: { Posts: req.body.disPost++ },
-        //         $push: { usersPostd: req.auth.userId },
-        // })
-        // .then(() => res.status(200).json({message: "Post unPost"}))
-        // .catch((error) => res.status(400).json({ error }))
-        // }
-        // else {
-        //     Post.findOne({ where: { id: req.params.id }})
-        //     .then((Post) => {
-        //         if(Post.usersPostd.includes(req.auth.userId)) {
-        //             Post.create ({where: { id: req.params.id }},
-        //                 {
-        //                     $inc: { Posts: req.body.Post-- },
-        //                 $pull: { usersPostd: req.auth.userId },
-        //         })
-        //         .then(() => res.status(200).json({ message: "Post drop"}))
-        //         .catch((error) => res.status(400).json({ error }))
-        //         }
-        //         else if (Post.userDisPostd.includes(req.body.userId)) {
-        //             Post.create ({where: { id: req.params.id }},
-        //                 {
-        //                 $inc: { Posts: req.body.disPost-- },
-        //                 $pull: { usersPostd: req.auth.userId },
-        //         })
-        //         .then(() => res.status(200).json({ message: "unPost drop"}))
-        //         .catch((error) => res.status(400).json({ error }))
-        //         }
-        //     })
-        //     .catch((error) => res.status(400).json({ error }));
-        // }
+
 

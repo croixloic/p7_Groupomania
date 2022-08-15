@@ -6,15 +6,16 @@ import Signup from '../../pages/Signup';
 import Login from '../../pages/Login';
 import SinglePost from '../SinglePost';
 
+
 const index = () => {
     axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.token;
     console.log(axios.defaults.headers.common['Authorization']);
     return (
           <BrowserRouter>
           <Routes>
-            <Route path='/' element = {<Home/>}/>
             <Route path='/signup' element = {<Signup/>}/>
             <Route path= '/login' element = {<Login/>}/>
+            <Route path='/' element = {<Home/>}/>
             <Route path='/post/:id' element={<SinglePost />} />
           </Routes>
           </BrowserRouter>
