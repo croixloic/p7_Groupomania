@@ -22,7 +22,7 @@ const PostsCreate = (props) => {
     if (content === "") {
       alert("veuillez mettre un message !");
     } else {
-      axios.post(`${process.env.REACT_APP_API_URL}post`, formData   //content
+      axios.post(`${process.env.REACT_APP_API_URL}post`, formData   
       ).then (()=> {
         props.Posts()
         setContent("")

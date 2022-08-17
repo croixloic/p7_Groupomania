@@ -91,7 +91,7 @@ const fs = require('fs');
      exports.getOneUser = (req, res, next) =>{
         User.findOne({
             where: { id: req.params.id },
-            attributes: ["lastName", "firstName", "email", "imagesUrl"],})
+            attributes: [ "id ","lastName", "firstName", "email", "imagesUrl", "admin"],})
             .then((user) =>{
                 res.status(200).json(user);
             })
