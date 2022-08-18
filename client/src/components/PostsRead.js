@@ -5,7 +5,7 @@ import PostsCreate from "./PostsCreate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const PostsRead = () => {
+const PostsRead = (props) => {
   const [posts, setPosts] = useState([]);
   const [updated, setUpdated] = useState(false);
   const [textUpdated, setTextUpdated] = useState(null);
@@ -28,7 +28,7 @@ const PostsRead = () => {
   }, []);
 
   const handleDelete = (postId, userId) => {
-    // if (userId.id ===)
+    
     axios
       .delete(`${process.env.REACT_APP_API_URL}post/` + postId)
       .then((req) => {
@@ -83,10 +83,10 @@ const PostsRead = () => {
       <h1> Les posts</h1>
       <PostsCreate Posts={Posts} />
       {posts.map((element) => (
-        <div className="post">
+        <div className="post" key={element.id}>
           <em>
             {element.user.firstName} {element.user.lastName}
-            <img src={element.images} />
+            <img src={element.images} alt=""/>
           </em>
           {updated === false && (
             <p>
@@ -127,21 +127,21 @@ const PostsRead = () => {
             </div>
           )}
           <Link to={`/post/${element.id}`}>Voir le post</Link>
-          <button
+          {props.user && (element.userId === props.user.id || props.user.admin === true)? <button
             onClick={() => {
-              // if (element.user.id ===)
               handleDelete(element.id, element.user);
             }}
           >
             Supprimer
-          </button>
+          </button>: null}
+          {props.user && (element.userId === props.user.id || props.user.admin === true)? 
           <button
             onClick={() => {
               setUpdated(!updated);
             }}
           >
             Modifier
-          </button>
+          </button>: null}
         </div>
       ))}
     </div>

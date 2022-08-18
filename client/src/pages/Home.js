@@ -14,20 +14,21 @@ const Home = () => {
       navigate("/login");
     }
       axios
-        .get(axios.get(`${process.env.REACT_APP_API_URL}user/` ))
+        .get(`${process.env.REACT_APP_API_URL}user/profil` )
         .then((res) => {
-          setUserCo(res);
-          console.log(UserCo);
+          console.log(res);
+          setUserCo(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-  }, [navigate]);
+      }, [navigate]);
+      console.log(UserCo);
 
   return (
     <div className="home-page">
       <Header />
-      <PostsRead />
+      <PostsRead user={UserCo}/>
       
     </div>
   );

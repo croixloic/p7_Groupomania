@@ -90,12 +90,14 @@ const fs = require('fs');
     
      exports.getOneUser = (req, res, next) =>{
         User.findOne({
-            where: { id: req.params.id },
-            attributes: [ "id ","lastName", "firstName", "email", "imagesUrl", "admin"],})
+            where: { id: req.auth.userId },
+            attributes: [ "id","lastName", "firstName", "email", "imagesUrl", "admin"],})
             .then((user) =>{
+                console.log(user);
                 res.status(200).json(user);
             })
             .catch((error)=>{
+                console.log(error);
                 res.status(500).json(error)
             })
      };
