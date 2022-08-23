@@ -15,17 +15,21 @@ const CommenteCreate = (props) => {
                 content,
             }) .then (() => {
                 props.commentaire()
+                e.target.reset()
             })
         }
     };
     return (
-        <div>
+        <div className='CreateComment'>
             <form action='' onSubmit={handleCreateComment } id="form-comment">
                     <textarea
                     name="content"
                     id="content"
+                    maxLength={400}
+                    className='TextAreaComment'
                     onChange={(e) => setContent(e.target.value)}
                   ></textarea>
+                  <br/>
                   <input type="submit" value="Envoyer"></input>
                 </form>
             

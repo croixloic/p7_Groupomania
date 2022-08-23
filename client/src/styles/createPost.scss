@@ -1,0 +1,29 @@
+@import './settings.scss';
+
+
+.formPost {
+    text-align: center;
+    
+    
+    textarea {
+        max-width: 50%;
+        min-width: 50%;
+        min-height: 100px;
+        max-height: 100px;
+        text-align: center;
+        font-size: 16px;
+        border: 2px solid $primary-color;
+        border-radius: 80px ;
+        box-shadow: 4px 4px 11px 0 $primary-color;
+        overflow: hidden;     
+    }
+    .btn {
+        margin: 15px 0;
+        font-size: 14px;
+        padding: 5px;
+    }
+    .btn:hover {
+        cursor: pointer;
+    }
+
+}

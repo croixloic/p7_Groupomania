@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -72,6 +75,206 @@ h2 {
   outline: none;
   text-decoration: none;
   font-family: "lato", sans-serif;
+}
+
+.logo {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.navBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.navBar .nav-active {
+  box-shadow: 4px 4px 11px 0 #fd2d01;
+  border-radius: 25px;
+}
+.navBar li {
+  color: #ffd7d7;
+  background: #4e5166;
+  border: 1px solid #fd2d01;
+  padding: 15px;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+.navBar li:hover {
+  box-shadow: 4px 4px 11px 0 #fd2d01;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "lato", sans-serif;
+}
+
+.formPost {
+  text-align: center;
+}
+.formPost textarea {
+  max-width: 50%;
+  min-width: 50%;
+  min-height: 100px;
+  max-height: 100px;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #fd2d01;
+  border-radius: 80px;
+  box-shadow: 4px 4px 11px 0 #fd2d01;
+  overflow: hidden;
+}
+.formPost .btn {
+  margin: 15px 0;
+  font-size: 14px;
+  padding: 5px;
+}
+.formPost .btn:hover {
+  cursor: pointer;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "lato", sans-serif;
+}
+
+.PostRead h1 {
+  text-align: center;
+  font-size: 3rem;
+  color: #fd2d01;
+}
+.PostRead .post {
+  margin: 10px 30% 20px 30%;
+  padding: 20px;
+  font-size: 1.5rem;
+  border: 3px solid #ffd7d7;
+  box-shadow: 4px 4px 11px 0 #ffd7d7;
+  transition: 0.3s;
+}
+.PostRead .post .picture {
+  margin: 10px 10%;
+}
+.PostRead .post .picture img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+.PostRead .post .socialAction {
+  display: flex;
+}
+.PostRead .post .socialAction .socialActionBtn {
+  font-size: 16px;
+  color: #4e5166;
+  margin-right: 10px;
+}
+.PostRead .post .btnPutDelete {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 25px;
+}
+.PostRead .post .btnPutDelete button {
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #ffd7d7;
+}
+.PostRead .textAreaModify {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #ffd7d7;
+  border-radius: 80px;
+  box-shadow: 4px 4px 11px 0 #ffd7d7;
+  overflow: hidden;
+}
+.PostRead .ValideModify {
+  text-align: center;
+}
+.PostRead .ValideModify .btnValideModify {
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #ffd7d7;
+  margin-top: 10px;
+}
+.PostRead .post:hover {
+  transform: scale(1.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  outline: none;
+  text-decoration: none;
+  font-family: "lato", sans-serif;
+}
+
+.Comments {
+  margin: 10px 20% 10px 20%;
+}
+.Comments a {
+  text-align: center;
+  font-size: 22px;
+}
+.Comments .Container {
+  border: 3px solid #ffd7d7;
+  box-shadow: 4px 4px 11px 0 #ffd7d7;
+  padding: 15px;
+}
+.Comments .Container .Post {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.Comments .Container img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+.Comments .CreateComment {
+  text-align: center;
+}
+.Comments .CreateComment .TextAreaComment {
+  max-width: 50%;
+  min-width: 50%;
+  min-height: 100px;
+  max-height: 100px;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #fd2d01;
+  border-radius: 80px;
+  box-shadow: 4px 4px 11px 0 #fd2d01;
+  overflow: hidden;
+  margin: 15px 0;
+  padding: 5px;
+}
+.Comments .CreateComment input {
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #ffd7d7;
+}
+.Comments .Comment {
+  margin: 10px 0;
+  border: 2px solid #4e5166;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 4px 4px 11px 0 #ffd7d7;
 }
 
 /*# sourceMappingURL=style.css.map */

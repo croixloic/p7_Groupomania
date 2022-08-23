@@ -79,20 +79,24 @@ const PostsRead = (props) => {
   };
 
   return (
-    <div>
-      <h1> Les posts</h1>
+    <div className="PostRead">
       <PostsCreate Posts={Posts} />
+      <h1>fil d'actualités</h1>
       {posts.map((element) => (
         <div className="post" key={element.id}>
           <em>
             {element.user.firstName} {element.user.lastName}
-            <img src={element.images} alt=""/>
+            <br />
           </em>
+          <br />
           {updated === false && (
             <p>
-              {element.content} {element.date}
+              {element.content} 
             </p>
           )}
+          <div className="picture">
+          <img src={element.images} alt=""/>
+          </div>
           <div className="socialAction">
             <button
               className="socialActionBtn"
@@ -104,19 +108,21 @@ const PostsRead = (props) => {
           </div>
           {updated && (
             <div>
-              <textarea
+              <textarea 
+                className="textAreaModify"
                 defaultValue={element.content}
                 onChange={(e) => setTextUpdated(e.target.value)}
               />
+              <br /> 
               <input
                 type="file"
                 name="images"
                 id="images"
                 onChange={(e) => handleFile(e)}
               ></input>
-              <div>
+              <div className="ValideModify">
                 <button
-                  className="btn"
+                  className="btnValideModify"
                   onClick={() => {
                     handleModify(element.id);
                   }}
@@ -126,7 +132,8 @@ const PostsRead = (props) => {
               </div>
             </div>
           )}
-          <Link to={`/post/${element.id}`}>Voir le post</Link>
+          <div className="btnPutDelete">
+          
           {props.user && (element.userId === props.user.id || props.user.admin === true)? <button
             onClick={() => {
               handleDelete(element.id, element.user);
@@ -142,6 +149,9 @@ const PostsRead = (props) => {
           >
             Modifier
           </button>: null}
+          </div>
+          <br />
+          <Link to={`/post/${element.id}`}  >Afficher plus...</Link>
         </div>
       ))}
     </div>

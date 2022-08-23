@@ -33,14 +33,18 @@ const PostsCreate = (props) => {
 
   return (
     <>
-      <form action="" onSubmit= {(e) =>{handleCreate(e)}} id="form-post">
+      <form action="" className="formPost" onSubmit= {(e) =>{handleCreate(e)}} id="form-post">
+        
         <textarea
           name="content"
           id="content"
+          placeholder="Quoi de neuf ?"
+          maxLength={400}
           onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <input type="file" name="images" id="images" onChange={(e) => {handleFile(e)}} />
-        <input type="submit" value="Envoyer"></input>
+          ></textarea>
+          <br />             
+        <input type="file" name="images" className="btn" id="images" onChange={(e) => {handleFile(e)}} />
+        <input type="submit" value="Envoyer" className="btn"></input>
       </form>
     </>
   );
