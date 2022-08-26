@@ -136,6 +136,7 @@ h2 {
   min-height: 100px;
   max-height: 100px;
   text-align: center;
+  padding: 0 20px;
   font-size: 16px;
   border: 2px solid #fd2d01;
   border-radius: 80px;
@@ -208,6 +209,7 @@ h2 {
   max-height: 80px;
   text-align: center;
   font-size: 16px;
+  padding: 0 20px;
   border: 2px solid #ffd7d7;
   border-radius: 80px;
   box-shadow: 4px 4px 11px 0 #ffd7d7;
@@ -303,6 +305,7 @@ h2 {
   max-height: 80px;
   text-align: center;
   font-size: 16px;
+  padding: 0 15px;
   border: 2px solid #ffd7d7;
   border-radius: 80px;
   box-shadow: 4px 4px 11px 0 #ffd7d7;

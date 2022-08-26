@@ -24,16 +24,28 @@ const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.
         console.error(`Impossible de ce connecté car ${error}`)
       });
    await sequelize.sync()
-   .then (() =>{
-     db.users.create ({
-       lastName: "admin",
-       firstName: "admin",
-       email: "admin@admin.fr",
-       password: "Testadmin123",
-       admin: "1"
-     })
-    })
-  }
+   function setAdmin(req, res){
+    db.users.findOne({where: { email: "admin@admin.fr" } || { lastName: "admin"}})
+    .then((user) => {
+      if (!user) {
+        db.users.create ({
+          lastName: "admin",
+          firstName: "admin",
+          email: "admin@admin.fr",
+          password: "Testadmin123",
+          admin: "1"
+      })
+      .then ((admin) => {
+        console.log("Votre compte admin est bien créé");
+      })
+    }
+    else {
+      console.log({ message: "l'admin est déjà créé" });
+    }
+  })
+}
+setAdmin();
+}
    initDb();
     
     //association de table 
