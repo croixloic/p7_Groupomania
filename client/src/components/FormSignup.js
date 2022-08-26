@@ -31,8 +31,24 @@ const FormSignup = () => {
             emailError.innerHTML = res.data.emailError;
             passwordError.innerHTML = res.data.passwordError;
           } else {
-            window.location = "/";
-            localStorage.token = res.data.token;
+            axios
+            .post(`${process.env.REACT_APP_API_URL}user/login`, {
+              email,
+              password,
+            })
+            .then((res) => {
+              if (res.data.errors) {
+                emailError.innerHTML = res.data.emailError;
+                passwordError.innerHTML = res.data.passwordError;
+              } else {
+                 window.location = "/";
+                localStorage.token = res.data.token;
+              }
+              
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           }
         })
         .catch((err) => {

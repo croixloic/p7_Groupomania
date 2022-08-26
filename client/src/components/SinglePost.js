@@ -16,7 +16,6 @@ const SinglePost = () => {
     axios
     .get(`${process.env.REACT_APP_API_URL}user/profil` )
     .then((res) => {
-      console.log(res.data);
       setUserCo(res.data);
     })
     .catch((err) => {
@@ -32,7 +31,7 @@ const SinglePost = () => {
       axios
       .get(`${process.env.REACT_APP_API_URL}comment/` + params.id)
       .then((comment, UserCo) => {
-         console.log(comment.data);
+         
          GetUser();
         setPost({ ...post.data, comments: comment.data });
       });
@@ -47,7 +46,7 @@ const SinglePost = () => {
     console.log(comments);
     axios.delete(`${process.env.REACT_APP_API_URL}comment/` + comments)
     .then((res) => {
-      console.log(res);
+      
       Comment();
     })
     .catch((err) => {
@@ -100,10 +99,10 @@ const SinglePost = () => {
                         </div>
                       </div>
           )}
-          {UserCo.user && (comment.data.length.userId === UserCo.id || UserCo.admin === true ) ?
+          {UserCo && (comment.userId === UserCo.id || UserCo.admin === true ) ?
           <button onClick={() => commentDelete(comment.id)}>Supprimer
           </button>: null}
-          {UserCo.user && (comment.data.length.userId === UserCo.id || UserCo.admin === true ) ?
+          {UserCo && (comment.userId === UserCo.id || UserCo.admin === true ) ?
           <button onClick={() => {setUpdated(!updated)}}>Modifier</button>: null}
 
           </div>

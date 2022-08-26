@@ -59,7 +59,7 @@ const fs = require('fs');
             res.status(200).json({
                 userId: user.id,
                 token: jwt.sign(
-                    { userId: user.id },
+                    { userId: user.id, admin: user.admin},
                     'RANDOM_TOKEN_SECRET',
                     { expiresIn: '24h' }
                     )

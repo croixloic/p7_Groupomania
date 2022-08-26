@@ -104,6 +104,18 @@ h2 {
 .navBar li:hover {
   box-shadow: 4px 4px 11px 0 #fd2d01;
 }
+.navBar button {
+  color: #ffd7d7;
+  background: #4e5166;
+  border: 1px solid #fd2d01;
+  padding: 15px;
+  border-radius: 25px;
+  font-size: 22px;
+  transition: 0.3s;
+}
+.navBar button:hover {
+  box-shadow: 4px 4px 11px 0 #fd2d01;
+}
 
 * {
   margin: 0;
@@ -275,6 +287,26 @@ h2 {
   border-radius: 20px;
   padding: 10px;
   box-shadow: 4px 4px 11px 0 #ffd7d7;
+  font-size: 18px;
+}
+.Comments .Comment button {
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  background: #ffd7d7;
+  margin: 10px;
+}
+.Comments .Comment textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  text-align: center;
+  font-size: 16px;
+  border: 2px solid #ffd7d7;
+  border-radius: 80px;
+  box-shadow: 4px 4px 11px 0 #ffd7d7;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */

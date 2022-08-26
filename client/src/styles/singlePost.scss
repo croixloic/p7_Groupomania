@@ -53,5 +53,26 @@
         border-radius: 20px;
         padding: 10px;
         box-shadow: 4px 4px 11px 0 $secondary-color;
+        font-size: 18px;
+
+        button {
+            font-size: 18px;
+            padding: 4px;
+            border-radius: 10px;
+            background: $secondary-color;
+            margin: 10px ;
+        }
+        textarea {
+            max-width: 100%;
+            min-width: 100%;
+            min-height: 80px;
+            max-height: 80px;
+            text-align: center;
+            font-size: 16px;
+            border: 2px solid $secondary-color;
+            border-radius: 80px ;
+            box-shadow: 4px 4px 11px 0 $secondary-color;
+            overflow: hidden;
+        }
     }
 }

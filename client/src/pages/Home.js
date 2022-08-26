@@ -16,14 +16,12 @@ const Home = () => {
       axios
         .get(`${process.env.REACT_APP_API_URL}user/profil` )
         .then((res) => {
-          console.log(res);
           setUserCo(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
       }, [navigate]);
-      console.log(UserCo);
 
   return (
     <div className="home-page">

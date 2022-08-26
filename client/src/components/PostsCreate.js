@@ -26,6 +26,7 @@ const PostsCreate = (props) => {
       ).then (()=> {
         props.Posts()
         setContent("")
+        setImages()
         e.target.reset()
       })
     }

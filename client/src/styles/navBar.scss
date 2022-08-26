@@ -18,7 +18,7 @@
     border-radius: 25px;
   }
   
-  li {
+  li  {
     color: $secondary-color;
     background: $tertiary-color;
     border: 1px solid $primary-color;
@@ -30,5 +30,16 @@
   li:hover {
     box-shadow: 4px 4px 11px 0 $primary-color;
   }
-
+   button {
+    color: $secondary-color;
+    background: $tertiary-color;
+    border: 1px solid $primary-color;
+    padding: 15px;
+    border-radius: 25px;
+    font-size: 22px;
+    transition: 0.3s;
+   }
+   button:hover {
+    box-shadow: 4px 4px 11px 0 $primary-color;
+   }
  }

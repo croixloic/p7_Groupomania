@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 
 
 router.get('/', postController.getAllPosts);
-router.get ('/:id', postController.getOnePost);
+router.get ('/:id',  postController.getOnePost);
 router.get('/likes/:id', auth, postController.allLike);
 router.post('/', auth, multer, postController.createPost);
 router.post('/likes/:id', auth, postController.likePost);

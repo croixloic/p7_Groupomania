@@ -8,7 +8,7 @@ const Header = () => {
 
     const logout = () => {
         localStorage.clear();
-        // location.reload();
+        window.location.reload();
     }
     return (
         <div className='header'>
@@ -18,8 +18,8 @@ const Header = () => {
                 <ul className='navBar'>
                     <NavLink to='/' className={(nav) => (nav.isActive ? 'nav-active' : '')}><li>Accueil</li></NavLink>
                     <NavLink to='/signup' className={(nav) => (nav.isActive ? 'nav-active' : '')}><li>Inscription</li></NavLink>
-                    <NavLink to='/login' className={(nav) => (nav.isActive ? 'nav-active' : '')}><li>Connexion</li></NavLink>
-                    <button onClick={() => { logout()}}>Déconnexion</button>
+                    {!localStorage.token ? <NavLink to='/login' className={(nav) => (nav.isActive ? 'nav-active' : '')}><li>Connexion</li></NavLink>
+                    :<button onClick={() => { logout()}}>Déconnexion</button>}
                 </ul>
             </nav>
             

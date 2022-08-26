@@ -22,8 +22,8 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getOnePost = (req, res, next) =>{
-    Post.findOne({
-        attributes: ["content", "images", "date"],})
+    Post.findOne({ where: {id: req.params.id}
+    })
         .then((post) =>{
             res.status(200).json(post)
         })
@@ -48,21 +48,39 @@ exports.getAllPosts = (req, res, next) => {
 exports.postModify = (req, res, next) => {
     console.log(req.body);
     Post.findOne({ where: { id: req.params.id }})
-    const postId = req.params.id
-    const userId = req.auth.userId
+    .then ((post) => {
+
+        const postId = req.params.id
+        const userId = req.auth.userId
+        
+        const postObject = req.file ? {
+            ...req.body,
+            images: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        } : { ...req.body }
+        console.log(req.file);
+        console.log(req.auth.admin);
+        console.log(req.auth.userId);
+        console.log(post.userId);
+        if(req.auth.admin || req.auth.userId === post.userId){
+
+            Post.update(postObject, {
+            where: {
     
-    const postObject = req.file ? {
-        ...req.body,
-        images: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    } : { ...req.body }
-    console.log(req.file);
-    Post.update(postObject, {
-        where: {
-            id: postId,
-            userId: userId
-        }
+                id: postId,
+                
+            }
+        })
+        .then(() => res.status(200).json({ message: 'Post modifié avec succès' }))
+        .catch(error => {
+            console.log(error);
+            res.status(400).json({ error: 'Impossible de modifier ce post', error });
+        })
+    }
+    else {
+        console.log("test");
+        res.status(400).json({ error: 'Impossible de modifier ce post', error }); 
+    }
     })
-    .then(() => res.status(200).json({ message: 'Post modifié avec succès' }))
     .catch(error => res.status(400).json({ error: 'Impossible de modifier ce post', error }));
 }
 

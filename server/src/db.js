@@ -34,6 +34,7 @@ const sequelize = new Sequelize (process.env.DATABASE,process.env.USER, process.
      })
     })
   }
+   initDb();
     
     //association de table 
     const db = {};

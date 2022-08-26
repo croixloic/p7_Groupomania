@@ -57,7 +57,6 @@ const PostsRead = (props) => {
         .put(`${process.env.REACT_APP_API_URL}post/` + postId, formData)
         .then((res) => {
           setUpdated(false);
-          console.log(res);
           Posts();
         })
         .catch((err) => {
@@ -70,7 +69,6 @@ const PostsRead = (props) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}post/likes/` + postId)
       .then((res) => {
-        console.log(res);
         Posts();
       })
       .catch((err) => {
@@ -138,7 +136,7 @@ const PostsRead = (props) => {
             onClick={() => {
               handleDelete(element.id, element.user);
             }}
-          >
+            >
             Supprimer
           </button>: null}
           {props.user && (element.userId === props.user.id || props.user.admin === true)? 
@@ -149,9 +147,9 @@ const PostsRead = (props) => {
           >
             Modifier
           </button>: null}
-          </div>
           <br />
-          <Link to={`/post/${element.id}`}  >Afficher plus...</Link>
+          </div>
+          <Link to={`/post/${element.id}`} >Afficher plus...</Link>
         </div>
       ))}
     </div>
