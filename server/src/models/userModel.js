@@ -5,7 +5,7 @@ const User = sequelize.define('user', {
     allowNull: false,
   },
   firstName: {
-    type: Sequelize.STRING, // change les data en Sequelize
+    type: Sequelize.STRING, 
     allowNull: false,
   },
   email: {
