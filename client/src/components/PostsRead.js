@@ -7,7 +7,7 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 const PostsRead = (props) => {
   const [posts, setPosts] = useState([]);
-  const [updated, setUpdated] = useState(false);
+  const [updated, setUpdated] = useState(0);
   const [textUpdated, setTextUpdated] = useState(null);
   const [images, setImage] = useState();
   
@@ -56,7 +56,7 @@ const PostsRead = (props) => {
       axios
         .put(`${process.env.REACT_APP_API_URL}post/` + postId, formData)
         .then((res) => {
-          setUpdated(false);
+          setUpdated(0);
           Posts();
         })
         .catch((err) => {
@@ -87,11 +87,9 @@ const PostsRead = (props) => {
             <br />
           </em>
           <br />
-          {updated === false && (
             <p>
               {element.content} 
             </p>
-          )}
           <div className="picture">
           <img src={element.images} alt=""/>
           </div>
@@ -104,7 +102,7 @@ const PostsRead = (props) => {
             </button>
             <p>{element.likes} j'aime</p>
           </div>
-          {updated && (
+          {updated === element.id && (
             <div>
               <textarea 
                 className="textAreaModify"
@@ -142,7 +140,7 @@ const PostsRead = (props) => {
           {props.user && (element.userId === props.user.id || props.user.admin === true)? 
           <button
             onClick={() => {
-              setUpdated(!updated);
+              setUpdated(updated === element.id ? 0 : element.id);
             }}
           >
             Modifier

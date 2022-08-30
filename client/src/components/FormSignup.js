@@ -6,6 +6,7 @@ const FormSignup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null)
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -52,7 +53,8 @@ const FormSignup = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data.message);
+          setError(err.response.data.message)
         });
     }
   };
@@ -104,7 +106,9 @@ const FormSignup = () => {
         value= {password}
         placeholder="Entrer votre mot de passe"
       />
-      <div className="password error"></div>
+      <div className="password error">
+        <span>{error}</span>
+      </div>
       <input type="submit" className="submit" value="S'incrire" />
     </form>
   );

@@ -4,6 +4,7 @@ import axios from "axios";
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,13 +23,14 @@ const FormLogin = () => {
           emailError.innerHTML = res.data.emailError;
           passwordError.innerHTML = res.data.passwordError;
         } else {
-           window.location = "/";
+          window.location = "/";
           localStorage.token = res.data.token;
         }
         
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.error);
+        setError(err.response.data.error)
       });
     }
   };
@@ -60,7 +62,9 @@ const FormLogin = () => {
         value={password}
         placeholder= "Entrer votre mot de passe"
       />
-      <div className="password error"></div>
+      <div className="password error">
+        <span>{error}</span>
+      </div>
       <br />
       <input type="submit" className="submit" value="Se connecter" />
     </form>

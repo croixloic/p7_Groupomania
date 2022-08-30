@@ -18,7 +18,7 @@ const fs = require('fs');
 
    exports.signup= (req, res, next) => {
        if(!schema.validate(req.body.password)) {
-           return res.status(400).json({ message: "votre mot de passe doit contenir au minimum 8 caractère, débuté par une majuscule,  contenir au moins 2 chiffres, pas d'espace "})  
+           return res.status(400).json({ message: "votre mot de passe doit contenir au minimum 8 caractères, contenir une majuscule, contenir au moins 2 chiffres et aucun d'espace."})  
        }
        else {      
                bcrypt.hash(req.body.password, 10)

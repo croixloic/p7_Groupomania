@@ -23,7 +23,23 @@ Le backend a été crée avec **Node.js**, **Express.js** et **MySQL** comme bas
     <br />
 -   Démarrer `npm install` pour installer toutes les dependencies du backend.
     <br />
+-   créer un dossier "images"
+    <br/>
 -   Dans le fichier `.env`, veuillez rentrer le host, les identifiants de votre utilisateur admin, le mot de passe, le port de votre base de donné et le nom de la base de données que vous souhaitez créer.
+    <br/>
+-   votre fichier '.env' doit remplir les champs suivant:
+    PORT = 
+    <br/>
+    USER= 
+    <br/>
+    PASSWORD=
+    <br/>
+    DATABASE=
+    <br/>
+    DB_PORT=
+    <br/>
+    HOST=
+    <br/>
 
 ### Development server
 
@@ -36,6 +52,7 @@ Le frontend a été crée avec React.js
 ### Installation
 
 Dans le dossier `/client` démarrez `npm install` pour installer toutes les dépendances du frontend.
+<br/>
 
 ### Development server
 

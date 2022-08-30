@@ -8,7 +8,7 @@ const SinglePost = () => {
   const params = useParams();
 
   const [post, setPost] = useState({});
-  const [updated, setUpdated] = useState(false)
+  const [updated, setUpdated] = useState(0)
   const [textUpdated, setTextUpdated] = useState(null);
   const [UserCo, setUserCo] = useState();
 
@@ -61,7 +61,7 @@ const SinglePost = () => {
       axios.put(`${process.env.REACT_APP_API_URL}comment/` + comments, {
         content: textUpdated,
       }).then((res) => {
-        setUpdated(false);
+        setUpdated(0);
         Comment();
       }).catch((err) => {
         console.log(err);
@@ -84,10 +84,8 @@ const SinglePost = () => {
           post.comments.map((comment) => ( 
           <div className='Comment' key={comment.id}> 
           <em>{comment.user.firstName} {comment.user.lastName}</em>
-          {updated === false && (
             <p>{comment.content}</p>
-          )}
-          {updated && (
+          {updated === comment.id &&  (
                         <div  >
                         <textarea
                           defaultValue={comment.content}
@@ -103,7 +101,7 @@ const SinglePost = () => {
           <button onClick={() => commentDelete(comment.id)}>Supprimer
           </button>: null}
           {UserCo && (comment.userId === UserCo.id || UserCo.admin === true ) ?
-          <button onClick={() => {setUpdated(!updated)}}>Modifier</button>: null}
+          <button onClick={() => {setUpdated(updated === comment.id ? 0 : comment.id)}}>Modifier</button>: null}
 
           </div>
           ))}
