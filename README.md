@@ -28,6 +28,7 @@ Le backend a été crée avec **Node.js**, **Express.js** et **MySQL** comme bas
 -   Dans le fichier `.env`, veuillez rentrer le host, les identifiants de votre utilisateur admin, le mot de passe, le port de votre base de donné et le nom de la base de données que vous souhaitez créer.
     <br/>
 -   votre fichier '.env' doit remplir les champs suivant:
+    <br/>
     PORT = 
     <br/>
     USER= 
